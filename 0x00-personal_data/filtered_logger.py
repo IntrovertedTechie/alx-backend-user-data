@@ -22,7 +22,6 @@ def filter_datum(fields: List[str], redaction: str,
 # Function to configure and return the logger
 
 
-
 def get_logger() -> logging.Logger:
     """Returns a configured logger object."""
     logger = logging.getLogger('user_data')
@@ -35,6 +34,8 @@ def get_logger() -> logging.Logger:
     return logger
 
 # Function to establish a connection to the MySQL database
+
+
 def get_db() -> connection.MySQLConnection:
     """Connects to the MySQL server using environmental variables."""
     username = environ.get("PERSONAL_DATA_DB_USERNAME", "root")
