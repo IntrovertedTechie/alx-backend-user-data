@@ -20,6 +20,8 @@ def filter_datum(fields: List[str], redaction: str,
     return re.sub(pattern, redaction, message)
 
 # Function to configure and return the logger
+
+
 def get_logger() -> logging.Logger:
     """Returns a configured logger object."""
     logger = logging.getLogger('user_data')
