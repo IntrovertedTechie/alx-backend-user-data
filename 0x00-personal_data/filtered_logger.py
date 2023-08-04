@@ -11,6 +11,8 @@ from os import environ
 PII_FIELDS = ('name', 'email', 'password', 'ssn', 'phone')
 
 # Function to obfuscate sensitive PII data in the log message
+
+
 def filter_datum(fields: List[str], redaction: str,
                  message: str, separator: str) -> str:
     """Returns the log message with sensitive fields obfuscated."""
@@ -51,10 +53,12 @@ class RedactingFormatter(logging.Formatter):
     FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
     SEPARATOR = ";"
 
+
     def __init__(self, fields: List[str]):
         """Initializes the RedactingFormatter class instance."""
         super(RedactingFormatter, self).__init__(self.FORMAT)
         self.fields = fields
+
 
     def format(self, record: logging.LogRecord) -> str:
         """Filters values in incoming log records to redact sensitive fields."""
