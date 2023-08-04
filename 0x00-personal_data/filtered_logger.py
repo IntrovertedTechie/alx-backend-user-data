@@ -70,6 +70,8 @@ class RedactingFormatter(logging.Formatter):
             self.SEPARATOR)
 
 # Main function to retrieve user data from the database and log it with redacted PII
+
+
 def main() -> None:
     """
     Connect to the database using get_db
