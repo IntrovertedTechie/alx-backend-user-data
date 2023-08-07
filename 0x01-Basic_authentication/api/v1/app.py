@@ -14,7 +14,6 @@ app.register_blueprint(app_views)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 
-# Add the new error handler for 401
 @app.errorhandler(401)
 def unauthorized(error) -> str:
     """ Unauthorized
@@ -22,7 +21,6 @@ def unauthorized(error) -> str:
     return jsonify({"error": "Unauthorized"}), 401
 
 
-# Add the new error handler for 403 
  @app.errorhandler(403) 
  def Forbidden(error) -> str: 
      """ Forbidden 
