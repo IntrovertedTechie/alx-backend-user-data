@@ -13,7 +13,7 @@ class Auth:
     """
     
 
-    def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
+   def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
         Checks if API routes require authentication
         
