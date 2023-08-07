@@ -11,7 +11,6 @@ class Auth:
     """
     Authentication class
     """
-
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
         Checks if API routes require authentication
@@ -23,12 +22,12 @@ class Auth:
         Returns:
             bool: True if authentication is required, False otherwise
         """
-        if path is None or not excluded_paths:
+        if path is None:
+            return True
+        if excluded_paths is None or not excluded_paths:
             return True
         for i in excluded_paths:
-            if i.endswith('*') and path.startswith(i[:-1]):
-                return False
-            elif i in {path, path + '/'}:
+            if i.endswith('/') and (path == i or path.startswith(i)):
                 return False
         return True
 
