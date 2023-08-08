@@ -50,7 +50,7 @@ class Auth:
             return request.headers.get('Authorization')
 
 
-   def current_user(self, request=None) -> TypeVar('User'):
+     def current_user(self, request=None) -> TypeVar('User'):
         """
         Placeholder for current user information
         
@@ -63,7 +63,7 @@ class Auth:
         return None
 
 
-   def require_auth(self, path, excluded_paths):
+     def require_auth(self, path, excluded_paths):
     """ Determines if authentication is required for the given path """
     if path is None or not isinstance(path, str):
         return True
