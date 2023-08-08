@@ -36,6 +36,11 @@ def not_found(error) -> str:
     return jsonify({"error": "Not found"}), 404
 
 
+auth_type = os.environ.get('AUTH_TYPE', 'auth')
+if auth_type == 'basic_auth':
+    auth = BasicAuth()
+else:
+    auth = Auth()
 
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
