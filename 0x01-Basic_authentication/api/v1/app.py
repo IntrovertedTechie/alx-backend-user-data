@@ -42,6 +42,7 @@ if auth_type == 'basic_auth':
 else:
     auth = Auth()
 
+
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
     port = getenv("API_PORT", "5000")
