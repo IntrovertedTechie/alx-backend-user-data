@@ -18,10 +18,9 @@ auth = None
 
 # Determine the authentication type based on the environment variable
 if getenv("AUTH_TYPE") == 'basic_auth':
-    auth = BasicAuth()  # Create an instance of BasicAuth for Basic Authentication
+    auth = BasicAuth()  
 else:
-    auth = Auth()  # Create an instance of Auth for other authentication types
-
+    auth = Auth()  
 @app.before_request
 def request_filter() -> None:
     """ Pre-request filter to check if authorization is required
