@@ -61,3 +61,22 @@ class Auth:
             TypeVar('User'): Current user information or None
         """
         return None
+
+
+def require_auth(self, path, excluded_paths):
+    """ Determines if authentication is required for the given path """
+    if path is None or not isinstance(path, str):
+        return True
+
+    if excluded_paths is None or not isinstance(excluded_paths, list):
+        return True
+
+    for excluded_path in excluded_paths:
+        if excluded_path.endswith("*"):
+            prefix = excluded_path.rstrip("*")
+            if path.startswith(prefix):
+                return False
+        elif path == excluded_path:
+            return False
+
+    return True
