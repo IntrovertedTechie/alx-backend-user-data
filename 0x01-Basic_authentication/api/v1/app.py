@@ -40,8 +40,6 @@ def request_filter() -> None:
             if auth.current_user(request) is None:
                 abort(403)
 
-
-          abort(403)
     request.current_user = auth.current_user(request)  # Store current user in request
 
 @app.errorhandler(404)
