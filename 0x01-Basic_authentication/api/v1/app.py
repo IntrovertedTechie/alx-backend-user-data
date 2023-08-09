@@ -41,6 +41,9 @@ def request_filter() -> None:
                 abort(403)
 
 
+          abort(403)
+    request.current_user = auth.current_user(request)  # Store current user in request
+
 @app.errorhandler(404)
 def not_found(error) -> str:
     """ Not found handler
