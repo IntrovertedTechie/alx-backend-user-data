@@ -15,6 +15,7 @@ class Auth:
     """
     Manages the API authentication
     """
+
     def __init__(self):
         """
         Initializes Auth instance
