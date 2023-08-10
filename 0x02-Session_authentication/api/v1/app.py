@@ -31,9 +31,7 @@ def bef_req():
     """
     Filter each request before it's handled by the proper route
     """
-    if auth is None:
-        pass
-    else:
+    if auth is not None:  # Use "is not None" instead of "is None"
         setattr(request, "current_user", auth.current_user(request))
         excluded = [
             '/api/v1/status/',
@@ -43,10 +41,11 @@ def bef_req():
         ]
         if auth.require_auth(request.path, excluded):
             cookie = auth.session_cookie(request)
-            if auth.authorization_header(request) is None and cookie is None:
+            if auth.authorization_header(request) is None or cookie is None:  # Use "or" instead of "and"
                 abort(401, description="Unauthorized")
             if auth.current_user(request) is None:
                 abort(403, description="Forbidden")
+
 
 
 @app.errorhandler(404)
