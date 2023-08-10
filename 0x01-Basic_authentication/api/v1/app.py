@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
-
+""" Module of Index views
 """
-Module of Index views
-"""
-
 from flask import jsonify, abort
 from api.v1.views import app_views
+from models.user import User  # Import the User model
 
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
 def status() -> str:
     """ GET /api/v1/status
     Return:
-       - the status of the API
+      - the status of the API
     """
     return jsonify({"status": "OK"})
 
@@ -21,19 +19,26 @@ def status() -> str:
 def unauthorized() -> str:
     """ GET /api/v1/unauthorized
     Return:
-       - abort(401)
+      - abort(401)
     """
     return abort(401)
 
-# ... Keep your desired changes ...
+
+@app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
+def forbidden() -> str:
+    """ GET /api/v1/forbidden
+    Return:
+      - abort(403)
+    """
+    return abort(403)
 
 
 @app_views.route('/stats/', strict_slashes=False)
 def stats() -> str:
     """ GET /api/v1/stats
     Return:
-       - the number of each objects
+      - the number of each objects
     """
     stats = {}
-    # Calculate and populate stats here, if needed
+    stats['users'] = User.count()
     return jsonify(stats)
