@@ -23,6 +23,10 @@ elif AUTH_TYPE == "basic_auth":
 elif AUTH_TYPE == "session_auth":
     from api.v1.auth.session_auth import SessionAuth
     auth = SessionAuth()
+elif auth_type == 'session_auth':
+    auth = SessionAuth()
+elif auth_type == 'session_exp_auth':  
+    auth = SessionExpAuth()
 
 @app.before_request
 def bef_req():
