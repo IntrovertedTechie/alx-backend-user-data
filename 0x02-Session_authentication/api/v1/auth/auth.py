@@ -8,22 +8,12 @@ from typing import (
     List,
     TypeVar
 )
-from api.v1.auth.session_auth import SessionAuth
-from models.user import User
+
 
 class Auth:
     """
     Manages the API authentication
     """
-
-    def __init__(self):
-        """
-        Initializes Auth instance
-        """
-        self.auth = None
-        if os.getenv('AUTH_TYPE') == 'session_auth':
-            self.auth = SessionAuth()
-
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
         Determines whether a given path requires authentication or not
@@ -66,24 +56,7 @@ class Auth:
         """
         Returns a User instance from information from a request object
         """
-        if self.auth and os.getenv('AUTH_TYPE') == 'session_auth':
-            session_cookie = self.session_cookie(request)
-            user_id = self.auth.user_id_for_session_id(session_cookie)
-            return User.get(user_id)
-        auth_header = self.authorization_header(request)
-        if not auth_header:
-            return None
-        auth_credentials = self.extract_base64_authorization_header(auth_header)
-        user_credentials = self.decode_base64_authorization_header(auth_credentials)
-        user_email = user_credentials[0]
-        user_pwd = user_credentials[1]
-        user = User.search({'email': user_email})
-        if not user or len(user) == 0:
-            return None
-        user = user[0]
-        if not user.is_valid_password(user_pwd):
-            return None
-        return user
+        return None
 
     def session_cookie(self, request=None):
         """
