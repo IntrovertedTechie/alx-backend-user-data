@@ -13,7 +13,9 @@ from models.user import User
 class BasicAuth(Auth):
     """Basic authentication class.
     """
-    def extract_base64_authorization_header(
+  
+
+  def extract_base64_authorization_header(
             self,
             authorization_header: str) -> str:
         """Extracts the Base64 part of the Authorization header
@@ -42,7 +44,9 @@ class BasicAuth(Auth):
             except (binascii.Error, UnicodeDecodeError):
                 return None
 
-    def extract_user_credentials(
+  
+
+  def extract_user_credentials(
             self,
             decoded_base64_authorization_header: str,
             ) -> Tuple[str, str]:
@@ -61,7 +65,9 @@ class BasicAuth(Auth):
                 return user, password
         return None, None
 
-    def user_object_from_credentials(
+  
+
+  def user_object_from_credentials(
             self,
             user_email: str,
             user_pwd: str) -> TypeVar('User'):
@@ -74,11 +80,14 @@ class BasicAuth(Auth):
                 return None
             if len(users) <= 0:
                 return None
-            if users[0].is_valid_password(user_pwd):
+            
+ users[0].is_valid_password(user_pwd):
                 return users[0]
         return None
 
-    def current_user(self, request=None) -> TypeVar('User'):
+  
+
+  def current_user(self, request=None) -> TypeVar('User'):
         """Retrieves the user from a request.
         """
         auth_header = self.authorization_header(request)
