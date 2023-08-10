@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from models.base import Base
 
 class UserSession(Base):
