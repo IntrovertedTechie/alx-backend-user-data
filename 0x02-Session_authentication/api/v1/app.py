@@ -19,19 +19,17 @@ app.register_blueprint(app_views)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 auth = None
 AUTH_TYPE = os.getenv("AUTH_TYPE")
-if AUTH_TYPE == "auth":
-    from api.v1.auth.auth import Auth
+if auth_type == 'auth':
     auth = Auth()
-elif AUTH_TYPE == "basic_auth":
-    from api.v1.auth.basic_auth import BasicAuth
+elif auth_type == 'basic_auth':
     auth = BasicAuth()
-elif AUTH_TYPE == "session_auth":
-    from api.v1.auth.session_auth import SessionAuth
-    auth = SessionAuth()
 elif auth_type == 'session_auth':
     auth = SessionAuth()
-elif auth_type == 'session_exp_auth':  
+elif auth_type == 'session_exp_auth':
     auth = SessionExpAuth()
+elif auth_type == 'session_db_auth':  # Use SessionDBAuth for session_db_auth
+    auth = SessionDBAuth()
+
 
 @app.before_request
 def bef_req():
