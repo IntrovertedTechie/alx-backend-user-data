@@ -17,8 +17,11 @@ auth = None
 auth_type = getenv('AUTH_TYPE', 'auth')
 if auth_type == 'auth':
     auth = Auth()
-if auth_type == 'basic_auth':
+elif auth_type == 'basic_auth':
     auth = BasicAuth()
+elif auth_type == 'session_auth':  # Add this condition
+    auth = SessionAuth() 
+
 
 
 @app.errorhandler(401)
