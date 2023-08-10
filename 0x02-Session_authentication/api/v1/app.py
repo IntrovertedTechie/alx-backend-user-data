@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 """
 Route module for the API
@@ -22,6 +23,7 @@ elif auth_type == 'basic_auth':
 elif auth_type == 'session_auth':
     auth = SessionAuth()
 
+
 @app.errorhandler(401)
 def unauthorized(error) -> str:
     """Unauthorized handler.
@@ -34,11 +36,13 @@ def forbidden(error) -> str:
     """
     return jsonify({"error": "Forbidden"}), 403
 
+
 @app.errorhandler(404)
 def not_found(error) -> str:
     """ Not found handler
     """
     return jsonify({"error": "Not found"}), 404
+
 
 @app.before_request
 def authenticate_user():
@@ -59,6 +63,7 @@ def authenticate_user():
             if user is None:
                 abort(403)
 
+
 @app.route('/api/v1/users/me', methods=['GET'], strict_slashes=False)  # Corrected route path
 def get_authenticated_user():
     """ GET /api/v1/users/me
@@ -70,6 +75,7 @@ def get_authenticated_user():
     if user is None:
         abort(404)
     return jsonify(user.to_json())
+
 
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
