@@ -8,8 +8,7 @@ from flask import Flask, jsonify, abort, request
 from flask_cors import (CORS, cross_origin)
 from api.v1.auth.auth import Auth
 from api.v1.auth.basic_auth import BasicAuth
-from api.v1.auth.session_auth import SessionAuth  # Import 
-
+from api.v1.auth.session_auth import SessionAuth  # Import SessionAuth
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
@@ -23,13 +22,11 @@ elif auth_type == 'basic_auth':
 elif auth_type == 'session_auth':
     auth = SessionAuth()
 
-
 @app.errorhandler(401)
 def unauthorized(error) -> str:
     """Unauthorized handler.
     """
     return jsonify({"error": "Unauthorized"}), 401
-
 
 @app.errorhandler(403)
 def forbidden(error) -> str:
@@ -37,13 +34,11 @@ def forbidden(error) -> str:
     """
     return jsonify({"error": "Forbidden"}), 403
 
-
 @app.errorhandler(404)
 def not_found(error) -> str:
     """ Not found handler
     """
     return jsonify({"error": "Not found"}), 404
-
 
 @app.before_request
 def authenticate_user():
@@ -64,7 +59,6 @@ def authenticate_user():
             if user is None:
                 abort(403)
 
-
 @app.route('/api/v1/users/me', methods=['GET'], strict_slashes=False)  # Corrected route path
 def get_authenticated_user():
     """ GET /api/v1/users/me
@@ -76,7 +70,6 @@ def get_authenticated_user():
     if user is None:
         abort(404)
     return jsonify(user.to_json())
-
 
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
