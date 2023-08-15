@@ -7,6 +7,7 @@ from sqlalchemy.orm.session import Session
 from sqlalchemy.orm.exc import NoResultFound
 from user import Base, User
 
+
 class DB:
     """Database interface class for user authentication."""
 
@@ -26,13 +27,10 @@ class DB:
         return self.__session
 
     def add_user(self, email: str, hashed_password: str) -> User:
-        """Adds a new user to the database.
-        
-        Args:
+        """Adds a new user to the database        Args:
             email (str): User's email.
             hashed_password (str): Hashed password.
-            
-        Returns:
+             Returns:
             User: Newly created User object.
         """
         session = self._session
@@ -46,18 +44,7 @@ class DB:
         return new_user
 
     def find_user_by(self, **kwargs) -> User:
-        """Finds a user by specified attributes.
-        
-        Args:
-            kwargs (dict): Dictionary of attributes to use as search parameters.
-            
-        Returns:
-            User: User object matching the search criteria.
-        
-        Raises:
-            InvalidRequestError: If an invalid attribute is used for searching.
-            NoResultFound: If no user is found matching the search criteria.
-        """
+        """Finds a user by specified attributes    """
         attrs, vals = [], []
         for attr, val in kwargs.items():
             if not hasattr(User, attr):
@@ -73,15 +60,11 @@ class DB:
         return user
 
     def update_user(self, user_id: int, **kwargs) -> None:
-        """Updates a user's attributes based on the provided user_id.
-        
+        """Updates a user's attributes based on the provided us
         Args:
             user_id (int): User's ID.
             kwargs (dict): Dictionary of attributes to update.
-        
-        Raises:
-            ValueError: If an invalid attribute is provided for updating.
-        """
+          """
         user = self.find_user_by(id=user_id)
         session = self._session
         for attr, val in kwargs.items():
