@@ -66,7 +66,7 @@ class Auth:
 
     # ... (similar comments for other methods)
 
-def get_user_from_session_id(self, session_id: str) -> User:
+    def get_user_from_session_id(self, session_id: str) -> User:
         """ Gets user based on their session id
             Args:
                 - session_id: user's session_id
@@ -82,8 +82,7 @@ def get_user_from_session_id(self, session_id: str) -> User:
             return None
         return user
 
-
-def destroy_session(self, user_id: int) -> None:
+    def destroy_session(self, user_id: int) -> None:
         """ Destroys user session
         """
         db = self._db
@@ -120,7 +119,6 @@ def destroy_session(self, user_id: int) -> None:
             raise ValueError
         db.update_user(user.id, hashed_password=_hash_password(password),
                        reset_token=None)
-
 
 
 def _hash_password(password: str) -> bytes:
