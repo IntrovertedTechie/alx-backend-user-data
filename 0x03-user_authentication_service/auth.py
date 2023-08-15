@@ -66,6 +66,22 @@ class Auth:
 
     # ... (similar comments for other methods)
 
+def get_user_from_session_id(self, session_id: str) -> User:
+        """ Gets user based on their session id
+            Args:
+                - session_id: user's session_id
+            Return:
+                - User if found else None
+        """
+        if not session_id:
+            return None
+        db = self._db
+        try:
+            user = db.find_user_by(session_id=session_id)
+        except NoResultFound:
+            return None
+        return user
+
 
 def destroy_session(self, user_id: int) -> None:
         """ Destroys user session
