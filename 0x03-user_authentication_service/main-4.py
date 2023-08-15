@@ -2,14 +2,22 @@
 """
 Main file
 """
-from auth import Auth, _hash_password
+from auth import Auth
 
-auth = Auth()  # Create an instance of the Auth class
+email = 'me@me.com'
+password = 'mySecuredPwd'
 
-email = "test@test.com"
-password = "SuperHashedPwd"
+auth = Auth()
 
-hashed_password = _hash_password(password)  # Hash the password
+try:
+    user = auth.register_user(email, password)
+    print("successfully created a new user!")
+except ValueError as err:
+    print("could not create a new user: {}".format(err))
 
-user = auth.register_user(email, hashed_password)  # Register the user
-print(user.id)
+try:
+    user = auth.register_user(email, password)
+    print("successfully created a new user!")
+except ValueError as err:
+    print("could not create a new user: {}".format(err))        
+
